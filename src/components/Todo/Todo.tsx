@@ -36,6 +36,9 @@ const Todo: FC<Props> = ({text, id, isChecked, dispatch }) => {
           Edit
         </button>
         <button
+          onClick={() => {
+            dispatch({ type: 'deleteTodo', id: id})
+          }}
         >
           Delete
         </button>
