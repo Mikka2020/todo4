@@ -13,6 +13,7 @@ export type Action = {
   text: string;
 } | {
   type: 'deleteTodo';
+  id: number;
 } | {
   type: 'editTodo';
   text: string;
@@ -42,7 +43,11 @@ const reducer: Reducer<State, Action> = (state, action) => {
       return nextState;
     }
     case 'deleteTodo': {
-      return state;
+      const nextState = { ...state };
+      const index = state.todoList.findIndex((todo) => todo.id === action.id );
+      const nextTodoList = state.todoList.slice(0, index).concat(state.todoList.slice(index + 1));
+      nextState.todoList = nextTodoList;
+      return nextState;
     }
     case 'editTodo': {
       if (state.editId === undefined) return state;
